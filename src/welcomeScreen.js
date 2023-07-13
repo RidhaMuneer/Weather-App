@@ -25,12 +25,17 @@ export default function welcomingScreen() {
     event.preventDefault();
     if (textLabel.value !== "") {
       let cityName = textLabel.value;
-      const response = loadingWeatherData(cityName);
-      mainContainer.removeChild(header);
-      mainContainer.removeChild(subHeader);
-      mainContainer.removeChild(inputForm);
-      displayNavBar();
-      displayCityWeather(response);
+      loadingWeatherData(cityName)
+        .then((response) => {
+          mainContainer.removeChild(header);
+          mainContainer.removeChild(subHeader);
+          mainContainer.removeChild(inputForm);
+          displayNavBar();
+          displayCityWeather(response);
+        })
+        .catch((error) => {
+          console.error("Error loading weather data:", error);
+        });
     }
   });
 

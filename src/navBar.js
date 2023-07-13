@@ -1,3 +1,6 @@
+import { loadingWeatherData } from "./weatherData.js";
+import { displayCityWeather } from "./displayData.js";
+
 export function displayNavBar() {
   const navBar = document.getElementById("nav-bar");
 
@@ -22,6 +25,20 @@ export function displayNavBar() {
   const enterButton = document.createElement("button");
   enterButton.textContent = "Enter";
   enterButton.id = "enter-button-1";
+  enterButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    if (textLabel.value !== "") {
+      let cityName = textLabel.value;
+      loadingWeatherData(cityName)
+        .then((response) => {
+          textLabel.value = "";
+          displayCityWeather(response);
+        })
+        .catch((error) => {
+          console.error("Error loading weather data:", error);
+        });
+    }
+  });
 
   inputForm.appendChild(textLabel);
   inputForm.appendChild(enterButton);
