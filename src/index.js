@@ -1,10 +1,7 @@
 import { loadingWeatherData } from "./weatherData.js";
+import welcomingScreen from "./welcomeScreen.js";
+
+const cityName = welcomingScreen();
 
 //this is returing an object that has all of the related data;
-loadingWeatherData()
-  .then((weatherData) => {
-    console.log(weatherData);
-  })
-  .catch((error) => {
-    console.error("Error loading weather data:", error);
-  });
+const response = await loadingWeatherData(cityName);
