@@ -1,5 +1,5 @@
 import { loadingWeatherData } from "./weatherData.js";
-import { displayCityWeather } from "./displayData.js";
+import { displayCityWeather, displayCityWeatherF } from "./displayData.js";
 
 export function displayNavBar() {
   const navBar = document.getElementById("nav-bar");
@@ -22,9 +22,11 @@ export function displayNavBar() {
   textLabel.id = "text-label-1";
   textLabel.type = "text";
   textLabel.required = true;
+  textLabel.style.borderRadius = "10px";
   const enterButton = document.createElement("button");
   enterButton.textContent = "Enter";
   enterButton.id = "enter-button-1";
+  enterButton.style.borderRadius = "10px";
   enterButton.addEventListener("click", function (event) {
     event.preventDefault();
     if (textLabel.value !== "") {
@@ -33,6 +35,12 @@ export function displayNavBar() {
         .then((response) => {
           textLabel.value = "";
           displayCityWeather(response);
+          changeUnitFr.addEventListener("click", function () {
+            displayCityWeatherF(response);
+          });
+          changeUnitC.addEventListener("click", function () {
+            displayCityWeather(response);
+          });
         })
         .catch((error) => {
           console.error("Error loading weather data:", error);
@@ -49,8 +57,10 @@ export function displayNavBar() {
   changeUnit.id = "buttons";
   const changeUnitFr = document.createElement("button");
   changeUnitFr.textContent = "Fr";
+  changeUnitFr.id = "fr";
   const changeUnitC = document.createElement("button");
   changeUnitC.textContent = "C";
+  changeUnitC.id = "c";
 
   changeUnit.appendChild(changeUnitFr);
   changeUnit.appendChild(changeUnitC);

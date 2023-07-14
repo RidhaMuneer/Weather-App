@@ -1,5 +1,5 @@
 import { loadingWeatherData } from "./weatherData.js";
-import { displayCityWeather } from "./displayData.js";
+import { displayCityWeather, displayCityWeatherF } from "./displayData.js";
 import { displayNavBar } from "./navBar.js";
 
 export default function welcomingScreen() {
@@ -32,6 +32,14 @@ export default function welcomingScreen() {
           mainContainer.removeChild(inputForm);
           displayNavBar();
           displayCityWeather(response);
+          const c = document.getElementById("c");
+          c.addEventListener("click", function () {
+            displayCityWeather(response);
+          });
+          const f = document.getElementById("fr");
+          f.addEventListener("click", function () {
+            displayCityWeatherF(response);
+          });
         })
         .catch((error) => {
           console.error("Error loading weather data:", error);

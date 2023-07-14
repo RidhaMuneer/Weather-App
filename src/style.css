@@ -120,6 +120,7 @@ body {
   min-width: 0;
   font-size: 18px;
   font-weight: bold;
+  border-radius: 10px;
   height: var(--h);
   cursor: pointer;
   color: var(--_c);
